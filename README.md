@@ -1,2 +1,2 @@
 # 2340movie
-Project 1: GT Movies Store using Django for CS 2340
+This is the first CS 2340 Objects and Design project at Georgia Tech. This project uses the Django framework to make a Movie Review web application. 
