@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from .forms import CustomUserCreationForm, CustomeErrorList
+from django.contrib.auth import login as auth_login, authenticate
 from django.shortcuts import redirect
 
 
@@ -19,14 +20,30 @@ def register(request):
         form = CustomUserCreationForm(request.POST,error_class = CustomeErrorList)
         if form.is_valid():
             form.save()
-            return redirect('home.index')
+            return redirect('account.login')
         else:
             template_data['form'] = form
             return render(request, 'account/register.html',
                           {'template_data': template_data})
 
 
-class LoginView(View):
-    template_name = 'account/login.html'
-    def get(self, request):
-        return
+
+def login(request):
+    template_data = {}
+    template_data['title'] = 'Log in'
+    if request.method == 'GET':
+        return render(request, 'account/login.html',
+                      {'template_data': template_data})
+    elif request.method == 'POST':
+        user = authenticate(
+            request,
+            username=request.POST['username'],
+            password=request.POST['password']
+        )
+        if user is None:
+            template_data['error'] = 'The username or password is incorrect.'
+        return render(request, 'account/login.html',
+                      {'template_data': template_data})
+    else:
+        auth_login(request, user)
+        return redirect('home.index')

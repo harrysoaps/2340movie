@@ -4,8 +4,10 @@ from . import views
 
 app_name = 'account'
 urlpatterns = [
-    path('register/', views.Register, name='accounts.register'),
-    path('login/', views.Login, name='login'),
+    path('register/', views.Register, name='account.register'),
+    path('login/', views.Login, name='account.login'),
+
+    path('logout/', views.logout, name='account.logout'),
 
 
 
