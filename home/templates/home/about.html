@@ -1,22 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About us page">
-    <title>About Us</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-  Welcome to out GT movies store! Here you can browse available movies to check out from our list
-  give movie reviews, and add/remove movies from your shopping cart! You can also view this website
-  from any desktop by opening a browser, so it is accessible to all. This site also features a GUI so
-  that you may view the site rom any screen size.
-
-  Do not leave any hate speech or violent messages in our movie review section as it will be viewed by
-  many users. Thank you for visiting our site! Any feedback or suggestions for improvements are welcome!
-
-</body>
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6 mx-auto mb-3">
+        <h2>About</h2>
+        <hr />
+        <p>
+            Welcome to out GT movies store! Here you can browse available movies to check out from our list
+            give movie reviews, and add/remove movies from your shopping cart! You can also view this website
+            from any desktop by opening a browser, so it is accessible to all. This site also features a GUI so
+            that you may view the site rom any screen size.
+        </p>
+        <p>
+            Do not leave any hate speech or violent messages in our movie review section as it will be viewed by
+            many users. Thank you for visiting our site! Any feedback or suggestions for improvements are welcome!
+        </p>
+      </div>
+      <div class="col-md-6 mx-auto mb-3 text-center">
+        <img src="{% static 'img/about.jpg' %}"
+             class="max-width-100"
+             alt="about" />
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
