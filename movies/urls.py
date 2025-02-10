@@ -22,5 +22,7 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('', include('home.urls')),
 
+    path('movies/', include('movies.urls')),
+
 
 ]
