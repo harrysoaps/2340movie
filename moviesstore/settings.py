@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'account',
-    'moviesstore'
+    'moviesstore',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'moviesstore.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'moviesstore/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'moviesstore/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
