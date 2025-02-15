@@ -42,7 +42,7 @@ def signup(request):
         form = CustomUserCreationForm(request.POST,error_class=CustomErrorList)
         if form.is_valid():
             form.save()
-            return redirect('account.login')
+            return redirect('accounts.login')
         else:
             template_data['form'] = form
             return render(request, 'accounts/signup.html',
