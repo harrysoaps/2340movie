@@ -21,7 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('account/', include('account.urls')),
+    path('accounts/', include('accounts.urls')),
     path('', include('home.urls')),
 
     path('movies/', include('movies.urls')),
