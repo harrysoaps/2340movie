@@ -17,9 +17,9 @@ class CustomUserCreationForm(UserCreationForm):
             self.fields[fieldname].help_text = None
             self.fields[fieldname].widget.attrs.update({'class': 'form-control'})
 
+
 class CustomPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
-        super(CustomPasswordResetForm, self).__init__(*args, **kwargs)
-        for fieldname in ['username', 'newpassword1', 'newpassword2']:
+        super(CustomPasswordResetForm,self).__init__(*args, **kwargs)
+        for fieldname in ['email']:
             self.fields[fieldname].help_text = None
-            self.fields[fieldname].widget.attrs.update({'class': 'form-control'})
