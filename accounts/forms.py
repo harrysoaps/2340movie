@@ -1,6 +1,9 @@
-from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
+from django.contrib.auth.forms import UserCreationForm
 from django.forms.utils import ErrorList
 from django.utils.safestring import mark_safe
+from django import forms
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class CustomErrorList(ErrorList):
     def __str__(self):
@@ -17,9 +20,24 @@ class CustomUserCreationForm(UserCreationForm):
             self.fields[fieldname].help_text = None
             self.fields[fieldname].widget.attrs.update({'class': 'form-control'})
 
+class CustomPasswordResetForm(forms.Form):
+    username = forms.CharField(label='Username', max_length=150)
+    new_password = forms.CharField(label='New Password', widget=forms.PasswordInput)
+    confirm_password = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
-class CustomPasswordResetForm(PasswordResetForm):
-    def __init__(self, *args, **kwargs):
-        super(CustomPasswordResetForm,self).__init__(*args, **kwargs)
-        for fieldname in ['email']:
-            self.fields[fieldname].help_text = None
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get("username")
+        password = cleaned_data.get("new_password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        # Check if username exists
+        if not User.objects.filter(username=username).exists():
+            raise ValidationError("No user found with this username.")
+
+        # Check if passwords match
+        if password != confirm_password:
+            raise ValidationError("Passwords do not match.")
+
+        return cleaned_data
+
